@@ -8,7 +8,7 @@ using static UnityEditor.VersionControl.Asset;
 public class MainHero : MonoBehaviour
 {
     [SerializeField] private float speed = 0.1f;
-    [SerializeField] private int lives = 5;
+    [SerializeField] private int health = 5;
     [SerializeField] private float jumpForce = 0.5f;
     private bool isGrounded = true;
     private int direction = 1;
@@ -97,6 +97,18 @@ public class MainHero : MonoBehaviour
         bool dir = direction < 0;
         ChangeDirectionEvent(dir);
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void GetDamage()
+    {
+        health -= 1;
+        Debug.Log(health);
+        if (health <= 0) Die();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
 
